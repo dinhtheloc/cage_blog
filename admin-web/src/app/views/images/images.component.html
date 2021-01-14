@@ -1,0 +1,45 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-4 pb-0">
+  <div class="d-block mb-md-0">
+    <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+      <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+        <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
+        <li class="breadcrumb-item active" aria-current="page">Quản lý hình ảnh</li>
+      </ol>
+    </nav>
+    <h2 class="h4">Quản lý hình ảnh</h2>
+    <p class="mb-0">Nơi lưu trữ hình ảnh sử dụng cho website của bạn</p>
+  </div>
+  <div class="btn-toolbar mb-md-0">
+    <div class="btn-group"><button type="button" class="btn btn-sm btn-outline-secondary">Share</button> <button
+        type="button" class="btn btn-sm btn-outline-secondary">Export</button></div>
+  </div>
+</div>
+<div class="my-4">
+  <a href="javascript://" class="btn btn-sm btn-primary">
+    <span class="fas fa-plus"></span><span> Thêm mới 1 ảnh</span></a>
+</div>
+
+
+<div class="row masonry-grid">
+  <div class="col-md-6 col-lg-4 masonry-column">
+    <div *ngFor="let item of array1">
+      <a href="javascript://" [popover]="messageCopy(item)" [outsideClick]="true" placement="top"
+        class="thumbnail">
+        <img (click)="copyLinkImage(item)" class="lift" [src]="item"></a>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-4 masonry-column">
+    <div *ngFor="let item of array2">
+      <a href="javascript://" [popover]="messageCopy(item)" [outsideClick]="true" placement="top"
+        class="thumbnail">
+        <img class="lift" (click)="copyLinkImage(item)" [src]="item"></a>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-4 masonry-column">
+    <div *ngFor="let item of array3">
+      <a href="javascript://" [popover]="messageCopy(item)" [outsideClick]="true" placement="top"
+        class="thumbnail">
+        <img class="lift" (click)="copyLinkImage(item)" [src]="item"></a>
+    </div>
+  </div>
+</div>

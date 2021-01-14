@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-4 pb-0">
+  <div class="d-block mb-md-0">
+    <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+      <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+        <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
+        <li class="breadcrumb-item active" aria-current="page">Quản lý bài viết</li>
+      </ol>
+    </nav>
+    <h2 class="h4">Quản lý bài viết</h2>
+    <p class="mb-0">Tại đây bạn có thể thêm xóa sửa những bài viết trong blog của bạn</p>
+  </div>
+  <div class="btn-toolbar mb-md-0">
+    <div class="btn-group"><button type="button" class="btn btn-sm btn-outline-secondary">Share</button> <button
+        type="button" class="btn btn-sm btn-outline-secondary">Export</button></div>
+  </div>
+</div>
+<div class="my-4">
+  <a href="javascript://" (click)="childModal.open()" class="btn btn-sm btn-primary">
+    <span class="fas fa-plus"></span><span> Tạo mới bài viết</span></a>
+</div>
+
+<div class="card card-body border-light shadow-sm table-wrapper table-responsive pt-0">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th class="border-0">#</th>
+        <th class="border-0">Tên bài viết</th>
+        <th class="border-0">Slug</th>
+        <th class="border-0">Ngày tạo</th>
+        <th class="border-0">Ngày cập nhật</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of list; let i = index">
+        <td><span class="font-weight-bold">{{((pageIndex-1) *pageSize) + (i+1)}}</span></td>
+        <td><span class="font-weight-normal">{{item.title}}</span></td>
+        <td><span class="font-weight-normal">{{item.slugName}}</span></td>
+        <td><span class="font-weight-normal">{{item.createDate | date:'dd/MM/yyyy HH:mm:ss'}}</span></td>
+        <td><span class="font-weight-normal">{{item.updateDate | date:'dd/MM/yyyy HH:mm:ss'}}</span></td>
+        <td>
+          <div class="btn-group" dropdown placement="bottom right">
+            <button id="button-basic" class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
+              dropdownToggle aria-controls="dropdown-basic">
+              <span class="icon icon-sm"><span class="fas fa-ellipsis-h icon-dark"></span> </span><span
+                class="sr-only">Toggle
+                Dropdown</span></button>
+            <div *dropdownMenu id="dropdown-basic" class="dropdown-menu dropdown-menu-right">
+              <a class="dropdown-item" href="#"><span class="fas fa-eye mr-2"></span>View Details</a>
+              <a class="dropdown-item" href="#"><span class="fas fa-edit mr-2"></span>Edit</a>
+              <a class="dropdown-item text-danger" href="#"><span class="fas fa-trash-alt mr-2"></span>Remove</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="card-footer px-3 d-flex align-items-center justify-content-between">
+    <pagination [totalItems]="totalSize" [itemsPerPage]="pageSize" [(ngModel)]="pageIndex"
+      (pageChanged)="pageChanged($event)"></pagination>
+    <div class="font-weight-bold small">Showing <b>{{list.length}}</b> out of <b>{{totalSize}}</b> entries</div>
+  </div>
+</div>
+
+<!-- create form -->
+
+<app-create-form #childModal></app-create-form>
