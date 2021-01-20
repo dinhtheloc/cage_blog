@@ -4,8 +4,6 @@
 
 
 .lift {
-    border-top-left-radius: .35rem;
-    border-top-right-radius: .35rem;
     -webkit-transition: box-shadow .25s ease,-webkit-transform .25s ease;
     transition: box-shadow .25s ease,-webkit-transform .25s ease;
     transition: box-shadow .25s ease,transform .25s ease;
@@ -17,3 +15,4 @@
     -webkit-transform: translate3d(0,-0.5rem,0);
     transform: translate3d(0,-0.5rem,0)
 }
+

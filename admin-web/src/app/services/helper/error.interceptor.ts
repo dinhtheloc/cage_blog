@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 // tslint:disable-next-line:import-blacklist
-import { throwError } from 'rxjs/internal/observable/throwError';
-import { Observable } from 'rxjs';
+// import { throwError } from 'rxjs/internal/observable/throwError';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {

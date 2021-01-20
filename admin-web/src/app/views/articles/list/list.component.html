@@ -26,6 +26,7 @@
         <th class="border-0">#</th>
         <th class="border-0">Tên bài viết</th>
         <th class="border-0">Slug</th>
+        <th class="border-0">Hiển thị</th>
         <th class="border-0">Ngày tạo</th>
         <th class="border-0">Ngày cập nhật</th>
       </tr>
@@ -35,6 +36,10 @@
         <td><span class="font-weight-bold">{{((pageIndex-1) *pageSize) + (i+1)}}</span></td>
         <td><span class="font-weight-normal">{{item.title}}</span></td>
         <td><span class="font-weight-normal">{{item.slugName}}</span></td>
+        <td><span class="font-weight-normal">
+          <span *ngIf="item.published" class="badge super-badge badge-lg badge-success">Có</span>
+          <span *ngIf="!item.published" class="badge super-badge badge-lg badge-danger">Không</span>
+        </span></td>
         <td><span class="font-weight-normal">{{item.createDate | date:'dd/MM/yyyy HH:mm:ss'}}</span></td>
         <td><span class="font-weight-normal">{{item.updateDate | date:'dd/MM/yyyy HH:mm:ss'}}</span></td>
         <td>
@@ -45,7 +50,6 @@
                 class="sr-only">Toggle
                 Dropdown</span></button>
             <div *dropdownMenu id="dropdown-basic" class="dropdown-menu dropdown-menu-right">
-              <a class="dropdown-item" href="#"><span class="fas fa-eye mr-2"></span>View Details</a>
               <a class="dropdown-item" href="#"><span class="fas fa-edit mr-2"></span>Edit</a>
               <a class="dropdown-item text-danger" href="#"><span class="fas fa-trash-alt mr-2"></span>Remove</a>
             </div>
@@ -63,4 +67,4 @@
 
 <!-- create form -->
 
-<app-create-form #childModal></app-create-form>
+<app-create-form #childModal (search)="search()"></app-create-form>

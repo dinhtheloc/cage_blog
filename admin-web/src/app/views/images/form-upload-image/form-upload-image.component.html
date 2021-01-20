@@ -1,0 +1,45 @@
+<div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-child-name">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-child-name" class="modal-title pull-left">Upload hình ảnh</h4>
+        <button type="button" class="close pull-right" (click)="childModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="createForm" class="position-relative" (ngSubmit)="onSubmit()">
+          <ng-lottie class="svg {{isHide ? 'hide' : ''}}" [options]="options" 
+          (complete)="complete($event)"
+          (animationCreated)="animationCreated($event)"></ng-lottie>
+          <div *ngIf="!linkImage" class="no-image">
+            <i class="far fa-image"></i>
+          </div>
+          <div *ngIf="linkImage" class="text-center">
+            <img class="rounded mb-2" [src]="linkImage" alt="image">
+          </div>
+
+          <div class="d-xl-flex align-items-center mb-2">
+            <div class="file-field">
+              <div class="d-flex justify-content-xl-center ml-xl-3">
+                <div class="d-flex">
+                  <span class="icon icon-md"><span class="fas fa-paperclip mr-3"></span></span>
+                  <input type="file" (change)="onFileSelect($event)">
+                  <div class="text-left">
+                    <div
+                      class="{{createForm.get('file').value ? 'text-primary' : 'text-dark'}} font-weight-normal mb-1 text-truncate">
+                      {{createForm.get('file').value ? createForm.get('file').value.name : 'Choose Image'}}</div>
+                    <div class="text-gray small">JPG, GIF or PNG. Max size of 800K</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">Upload hình ảnh</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

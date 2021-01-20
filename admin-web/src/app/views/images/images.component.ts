@@ -1,16 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-
-const array = [
-  'http://via.placeholder.com/400x450/3F51B5/fff',
-  'http://via.placeholder.com/400x250/3F51B5/fff',
-  'http://via.placeholder.com/400x550/3F51B5/fff',
-  'http://via.placeholder.com/400x150/3F51B5/fff',
-  'http://via.placeholder.com/400x250/3F51B5/fff',
-  'http://via.placeholder.com/400x650/3F51B5/fff',
-  'http://via.placeholder.com/400x550/3F51B5/fff',
-  'http://via.placeholder.com/400x450/3F51B5/fff',
-  'http://via.placeholder.com/400x450/3F51B5/fff'
-];
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { environment } from '../../../environments/environment';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-images',
@@ -23,16 +14,34 @@ export class ImagesComponent implements OnInit {
   array1 = [];
   array2 = [];
   array3 = [];
+  linkRemove = '';
+  makeLinkRemove = '';
 
-  constructor() { }
+  @ViewChild('confirmModal', { static: false }) confirmModal: ModalDirective;
+
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.divideElementArray();
+    this.search();
   }
 
-  divideElementArray() {
-    let i = 1;
+  search() {
+    const url = `${environment.urlApi}/api/getListImage`;
 
+    this.http.get(url, {})
+      .subscribe(
+        (res: any) => {
+          this.divideElementArray(res);
+        }
+      );
+  }
+
+
+  divideElementArray(array) {
+    let i = 1;
+    this.array1 = [];
+    this.array2 = [];
+    this.array3 = [];
     if (array && array.length > 0) {
       // tslint:disable-next-line:prefer-for-of
       for (let index = 0; index < array.length; index++) {
@@ -57,6 +66,10 @@ export class ImagesComponent implements OnInit {
     return `Đã copy thành công. Link: ${link}`;
   }
 
+  makeLinkImage(link) {
+    return `${environment.urlApi}${link}`;
+  }
+
 
   copyLinkImage(val: string) {
     const selBox = document.createElement('textarea');
@@ -72,5 +85,23 @@ export class ImagesComponent implements OnInit {
     document.body.removeChild(selBox);
   }
 
+  removeImage(linkRemove) {
+    this.linkRemove = linkRemove;
+    this.makeLinkRemove = `${environment.urlApi}${linkRemove}`;
+    this.confirmModal.show();
+  }
 
+  remove() {
+    const url = `${environment.urlApi}/api/deleteImage`;
+    const body = {
+      link: this.linkRemove
+    };
+    this.http.post(url, body, { responseType: 'text' })
+      .subscribe(
+        (res: any) => {
+          this.confirmModal.hide();
+          this.search();
+        }
+      );
+  }
 }

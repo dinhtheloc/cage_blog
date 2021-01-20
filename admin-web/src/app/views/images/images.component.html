@@ -15,7 +15,7 @@
   </div>
 </div>
 <div class="my-4">
-  <a href="javascript://" class="btn btn-sm btn-primary">
+  <a href="javascript://" (click)="childModal.open()" class="btn btn-sm btn-primary">
     <span class="fas fa-plus"></span><span> Thêm mới 1 ảnh</span></a>
 </div>
 
@@ -23,23 +23,62 @@
 <div class="row masonry-grid">
   <div class="col-md-6 col-lg-4 masonry-column">
     <div *ngFor="let item of array1">
-      <a href="javascript://" [popover]="messageCopy(item)" [outsideClick]="true" placement="top"
+      <button type="button" class="close" (click)="removeImage(item.link)">
+        <span aria-hidden="true">×</span>
+      </button>
+      <a href="javascript://" [popover]="messageCopy(item.link)" [outsideClick]="true" placement="top"
         class="thumbnail">
-        <img (click)="copyLinkImage(item)" class="lift" [src]="item"></a>
+        <img (click)="copyLinkImage(item.link)" class="lift rounded" [src]="makeLinkImage(item.link)"></a>
     </div>
   </div>
   <div class="col-md-6 col-lg-4 masonry-column">
     <div *ngFor="let item of array2">
-      <a href="javascript://" [popover]="messageCopy(item)" [outsideClick]="true" placement="top"
+      <button type="button" class="close" (click)="removeImage(item.link)">
+        <span aria-hidden="true">×</span>
+      </button>
+      <a href="javascript://" [popover]="messageCopy(item.link)" [outsideClick]="true" placement="top"
         class="thumbnail">
-        <img class="lift" (click)="copyLinkImage(item)" [src]="item"></a>
+        <img class="lift rounded" (click)="copyLinkImage(item.link)" [src]="makeLinkImage(item.link)"></a>
     </div>
   </div>
   <div class="col-md-6 col-lg-4 masonry-column">
     <div *ngFor="let item of array3">
-      <a href="javascript://" [popover]="messageCopy(item)" [outsideClick]="true" placement="top"
+      <button type="button" class="close" (click)="removeImage(item.link)">
+        <span aria-hidden="true">×</span>
+      </button>
+      <a href="javascript://" [popover]="messageCopy(item.link)" [outsideClick]="true" placement="top"
         class="thumbnail">
-        <img class="lift" (click)="copyLinkImage(item)" [src]="item"></a>
+        <img class="lift rounded" (click)="copyLinkImage(item.link)" [src]="makeLinkImage(item.link)"></a>
     </div>
+  </div>
+</div>
+
+<app-form-upload-image #childModal></app-form-upload-image>
+
+<div bsModal #confirmModal="bs-modal" class="modal fade" 
+tabindex="-1" role="dialog" 
+aria-labelledby="modal-notification" aria-hidden="true">
+  <div class="modal-dialog modal-info modal-dialog-centered" role="document">
+      <div class="modal-content bg-gradient-secondary">
+          <div class="modal-header">
+              <p class="modal-title" id="modal-title-notification">Thông báo từ hệ thống.</p>
+              <button type="button" class="close" 
+              (click)="confirmModal.hide()"
+              data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <div class="py-3 text-center">
+                  <img class="rounded mb-2" [src]="makeLinkRemove">
+                  <h4 class="modal-title my-3">Hệ thống muốn xác nhận từ bạn!</h4>
+                  <p>Bạn có thực sự muốn xóa ảnh này ?</p>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" (click)="remove()" class="btn btn-sm btn-primary">Xóa</button>
+              <button type="button" class="btn btn-sm btn-white" (click)="confirmModal.hide()">Bỏ qua</button>
+          </div>
+      </div>
   </div>
 </div>

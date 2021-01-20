@@ -8,6 +8,11 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { QuillModule } from 'ngx-quill';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { LottieModule } from 'ngx-lottie';
+
+export function playerFactory() {
+  return import('lottie-web');
+}
 @NgModule({
   imports: [
     CommonModule,
@@ -17,7 +22,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
     QuillModule.forRoot(),
-    PaginationModule.forRoot()
+    PaginationModule.forRoot(),
+    LottieModule.forRoot({ player: playerFactory })
   ],
   declarations: [ListComponent, CreateFormComponent]
 })
