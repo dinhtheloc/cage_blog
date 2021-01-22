@@ -8,10 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="createForm" class="position-relative" (ngSubmit)="onSubmit()">
-          <ng-lottie class="svg {{isHide ? 'hide' : ''}}" [options]="options" 
-          (complete)="complete($event)"
-          (animationCreated)="animationCreated($event)"></ng-lottie>
+        <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
           <div *ngIf="!linkImage" class="no-image">
             <i class="far fa-image"></i>
           </div>

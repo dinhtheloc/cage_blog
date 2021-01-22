@@ -3,8 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { ModalDirective } from 'ngx-bootstrap/modal';
-import { AnimationItem } from 'lottie-web';
-import { AnimationOptions } from 'ngx-lottie';
+import { SharedService } from '../../../services/shared.service';
+
 @Component({
   selector: 'app-form-upload-image',
   templateUrl: './form-upload-image.component.html',
@@ -17,16 +17,11 @@ export class FormUploadImageComponent implements OnInit {
     file: new FormControl(null)
   });
   linkImage = '';
-  
-  isHide = true;
-  options: AnimationOptions = {
-    loop: false,
-    autoplay: false,
-    path: '/assets/json/confetti.json'
-  };
-  svgConfetti: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private sharedService: SharedService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -42,8 +37,8 @@ export class FormUploadImageComponent implements OnInit {
     this.http.post(url, formData, { responseType: 'text' }).subscribe(
       res => {
         // tslint:disable-next-line:no-string-literal
-        this.isHide = false;
-        this.svgConfetti.goToAndPlay(0, true);
+        this.sharedService.activeConfetti.emit();
+        this.childModal.hide();
         this.linkImage = `${environment.urlApi}${res}`;
       }
     );
@@ -54,13 +49,5 @@ export class FormUploadImageComponent implements OnInit {
       const file = event.target.files[0];
       this.createForm.get('file').setValue(file);
     }
-  }
-
-  complete(animationItem: AnimationItem): void {
-    this.isHide = true;
-  }
-
-  animationCreated(animationItem: AnimationItem): void {
-    this.svgConfetti = animationItem;
   }
 }

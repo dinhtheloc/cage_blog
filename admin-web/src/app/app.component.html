@@ -1,2 +1,5 @@
-
 <router-outlet></router-outlet>
+
+
+<ng-lottie class="svg {{isHide ? 'hide' : ''}}" [options]="options" (complete)="complete($event)"
+  (animationCreated)="animationCreated($event)"></ng-lottie>

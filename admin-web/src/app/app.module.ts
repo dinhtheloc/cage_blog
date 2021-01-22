@@ -16,8 +16,12 @@ import { NavComponent } from './components/nav/nav.component';
 import { AuthGuard } from './services/guard/auth.guard';
 import { PermissionGuard } from './services/guard/permission.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LottieModule } from 'ngx-lottie';
 
 
+export function playerFactory() {
+  return import('lottie-web');
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +38,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    LottieModule.forRoot({ player: playerFactory })
   ],
   providers: [
     AuthGuard,

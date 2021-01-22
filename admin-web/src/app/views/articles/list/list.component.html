@@ -25,7 +25,7 @@
       <tr>
         <th class="border-0">#</th>
         <th class="border-0">Tên bài viết</th>
-        <th class="border-0">Slug</th>
+        <th class="border-0">Banner</th>
         <th class="border-0">Hiển thị</th>
         <th class="border-0">Ngày tạo</th>
         <th class="border-0">Ngày cập nhật</th>
@@ -35,11 +35,15 @@
       <tr *ngFor="let item of list; let i = index">
         <td><span class="font-weight-bold">{{((pageIndex-1) *pageSize) + (i+1)}}</span></td>
         <td><span class="font-weight-normal">{{item.title}}</span></td>
-        <td><span class="font-weight-normal">{{item.slugName}}</span></td>
+        <td>
+          <div class="user-avatar xl-avatar">
+            <img class="rounded" [src]="makeLinkImage(item.banner)" alt="banner">
+          </div>
+        </td>
         <td><span class="font-weight-normal">
-          <span *ngIf="item.published" class="badge super-badge badge-lg badge-success">Có</span>
-          <span *ngIf="!item.published" class="badge super-badge badge-lg badge-danger">Không</span>
-        </span></td>
+            <span *ngIf="item.published" class="badge super-badge badge-lg badge-success">Có</span>
+            <span *ngIf="!item.published" class="badge super-badge badge-lg badge-danger">Không</span>
+          </span></td>
         <td><span class="font-weight-normal">{{item.createDate | date:'dd/MM/yyyy HH:mm:ss'}}</span></td>
         <td><span class="font-weight-normal">{{item.updateDate | date:'dd/MM/yyyy HH:mm:ss'}}</span></td>
         <td>
@@ -50,8 +54,10 @@
                 class="sr-only">Toggle
                 Dropdown</span></button>
             <div *dropdownMenu id="dropdown-basic" class="dropdown-menu dropdown-menu-right">
-              <a class="dropdown-item" href="#"><span class="fas fa-edit mr-2"></span>Edit</a>
-              <a class="dropdown-item text-danger" href="#"><span class="fas fa-trash-alt mr-2"></span>Remove</a>
+              <a class="dropdown-item" href="javascript://" (click)="openUpdateForm(item)"><span class="fas fa-edit mr-2"></span>Edit</a>
+              <a class="dropdown-item text-danger" 
+              (click)="openRemoveForm(item)"
+              href="javascript://"><span class="fas fa-trash-alt mr-2"></span>Remove</a>
             </div>
           </div>
         </td>
@@ -66,5 +72,33 @@
 </div>
 
 <!-- create form -->
-
 <app-create-form #childModal (search)="search()"></app-create-form>
+<app-edit-form #editModal (search)="search()"></app-edit-form>
+
+
+<div bsModal #confirmModal="bs-modal" class="modal fade" 
+tabindex="-1" role="dialog" 
+aria-labelledby="modal-notification" aria-hidden="true">
+  <div class="modal-dialog modal-info modal-dialog-centered" role="document">
+      <div class="modal-content bg-gradient-secondary">
+          <div class="modal-header">
+              <p class="modal-title" id="modal-title-notification">Thông báo từ hệ thống.</p>
+              <button type="button" class="close" 
+              (click)="confirmModal.hide()"
+              data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <div class="py-3 text-center">
+                  <h4 class="modal-title my-3">Hệ thống muốn xác nhận từ bạn!</h4>
+                  <p>Bạn có thực sự muốn xóa bài viết "<strong>{{itemRemove ? itemRemove.title : ''}}</strong>" ?</p>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" (click)="remove()" class="btn btn-sm btn-primary">Xóa</button>
+              <button type="button" class="btn btn-sm btn-white" (click)="confirmModal.hide()">Bỏ qua</button>
+          </div>
+      </div>
+  </div>
+</div>

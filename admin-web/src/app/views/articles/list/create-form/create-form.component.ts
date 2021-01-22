@@ -3,8 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
 import { ModalDirective } from 'ngx-bootstrap/modal';
-import { AnimationItem } from 'lottie-web';
-import { AnimationOptions } from 'ngx-lottie';
+import { SharedService } from '../../../../services/shared.service';
+
 @Component({
     selector: 'app-create-form',
     templateUrl: './create-form.component.html',
@@ -14,20 +14,16 @@ export class CreateFormComponent implements OnInit {
     @Output() search = new EventEmitter();
     createForm = new FormGroup({
         title: new FormControl('', Validators.required),
+        banner: new FormControl(''),
         body: new FormControl(''),
         published: new FormControl(false)
     });
 
-    isHide = true;
-    options: AnimationOptions = {
-        loop: false,
-        autoplay: false,
-        path: '/assets/json/confetti.json'
-    };
-    svgConfetti: any;
 
     @ViewChild('childModal', { static: false }) childModal: ModalDirective;
-    constructor(private http: HttpClient) { }
+    constructor(
+        private http: HttpClient,
+        private sharedService: SharedService) { }
 
     ngOnInit() {
     }
@@ -44,6 +40,7 @@ export class CreateFormComponent implements OnInit {
 
         const body = {
             title: String(this.createForm.value.title),
+            banner: String(this.createForm.value.banner),
             body: String(this.createForm.value.body),
             published: Boolean(this.createForm.value.published)
         };
@@ -54,22 +51,12 @@ export class CreateFormComponent implements OnInit {
                 res => {
                     // tslint:disable-next-line:no-string-literal
                     console.log(res);
-                    this.isHide = false;
-                    this.svgConfetti.goToAndPlay(0, true);
                     this.childModal.hide();
                     this.search.emit();
-                    // localStorage.setItem('token', res['token']);
-                    // this.router.navigate(['/']);
+                    this.sharedService.activeConfetti.emit();
                 }
             );
     }
 
-    complete(animationItem: AnimationItem): void {
-        this.isHide = true;
-    }
-
-    animationCreated(animationItem: AnimationItem): void {
-        this.svgConfetti = animationItem;
-    }
 
 }
