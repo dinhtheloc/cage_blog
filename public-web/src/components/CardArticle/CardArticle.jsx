@@ -15,21 +15,23 @@ function CardArticle(props) {
     const { articleList } = props;
     return (
         articleList ? articleList.map((item, i) => {
-            const date = new Date(item.date_create._seconds * 1000);
+            console.log('item', item);
+            const date = new Date(item.createDate);
             const strCreateDate = parseDateToString(date);
-
-            return (<div key={item.article_id} className="col-lg-4">
+            const linkImage = `${process.env.REACT_APP_IMAGE_URL}${item.image400x400}`
+            
+            return (<div key={item._id} className="col-lg-4">
                 <div className="mb-5 mb-lg-0" data-animate-hover="1">
                     <div className="animate-this">
-                        <Link to={`/article/${item.slug_name}`}>
-                            <img alt="Image placeholder" className="img-fluid rounded shadow"
-                                src="https://preview.webpixels.io/purpose-website-ui-kit/assets/img/theme/light/img-1-800x600.jpg" />
+                        <Link to={`/article/${item.slugName}.${item._id}`}>
+                            <img alt="Image" className="img-fluid rounded shadow"
+                                src={linkImage} />
                         </Link>
                     </div>
                     <div className="pt-4">
                         <small className="text-uppercase">{strCreateDate}</small>
                         <h5>{item.title}</h5>
-                        <p className="mt-3">When we strive to become better than we are, everything around us becomes better, too.</p>
+                        <p className="mt-3">{item.description}</p>
                     </div>
                 </div>
             </div>)

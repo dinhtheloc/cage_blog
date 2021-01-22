@@ -16,6 +16,8 @@ export class CreateFormComponent implements OnInit {
         title: new FormControl('', Validators.required),
         banner: new FormControl(''),
         body: new FormControl(''),
+        image400x400: new FormControl(''),
+        description: new FormControl(''),
         published: new FormControl(false)
     });
 
@@ -32,16 +34,15 @@ export class CreateFormComponent implements OnInit {
         this.childModal.show();
     }
 
-
     onSubmit() {
-        console.warn('onSubmit', this.createForm.value);
-
         const url = `${environment.urlApi}/api/createArticle`;
 
         const body = {
             title: String(this.createForm.value.title),
             banner: String(this.createForm.value.banner),
             body: String(this.createForm.value.body),
+            image400x400: String(this.createForm.value.image400x400),
+            description: String(this.createForm.value.description),
             published: Boolean(this.createForm.value.published)
         };
 
@@ -50,7 +51,6 @@ export class CreateFormComponent implements OnInit {
             .subscribe(
                 res => {
                     // tslint:disable-next-line:no-string-literal
-                    console.log(res);
                     this.childModal.hide();
                     this.search.emit();
                     this.sharedService.activeConfetti.emit();

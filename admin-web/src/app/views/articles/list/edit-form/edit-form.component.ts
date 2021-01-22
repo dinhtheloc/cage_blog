@@ -19,6 +19,8 @@ export class EditFormComponent implements OnInit {
     title: new FormControl('', Validators.required),
     banner: new FormControl(''),
     body: new FormControl(''),
+    image400x400: new FormControl(''),
+    description: new FormControl(''),
     published: new FormControl(false)
   });
 
@@ -42,6 +44,8 @@ export class EditFormComponent implements OnInit {
       title: data.title ? data.title : '',
       banner: data.banner ? data.banner : '',
       body: data.body ? data.body : '',
+      image400x400: data.image400x400 ? data.image400x400 : '',
+      description: data.description ? data.description : '',
       published: data.published ? data.published : false
     });
   }
@@ -54,6 +58,8 @@ export class EditFormComponent implements OnInit {
       title: String(this.updateForm.value.title),
       banner: String(this.updateForm.value.banner),
       body: String(this.updateForm.value.body),
+      image400x400: String(this.updateForm.value.image400x400),
+      description: String(this.updateForm.value.description),
       published: Boolean(this.updateForm.value.published)
     };
 
