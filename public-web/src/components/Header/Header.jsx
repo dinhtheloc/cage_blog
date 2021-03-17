@@ -10,7 +10,7 @@ function Header(props) {
         <Link className="navbar-brand mr-lg-5" to="/">
           <img alt="Logo" 
           style={{height: 70}}
-          src="/img/logo-while.svg" id="navbar-logo"/>
+          src="/img/logo.png" id="navbar-logo"/>
         </Link>
         <button className="navbar-toggler pr-0" type="button" data-toggle="collapse" data-target="#navbar-main-collapse" aria-controls="navbar-main-collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>

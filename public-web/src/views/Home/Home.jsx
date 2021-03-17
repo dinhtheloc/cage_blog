@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { loaderState } from '../../recoil/loaderState';
 import { useRecoilState } from 'recoil';
 import articleApi from '../../api/articleApi';
-import Pagination from '../../components/Pagination';
-
 import CardArticle from '../../components/CardArticle/CardArticle';
+import Pagination from '../../components/Pagination';
+import { loaderState } from '../../recoil/loaderState';
+
 function Home(props) {
 
     const [loader, setLoader] = useRecoilState(loaderState);
     const [articleList, setArticleList] = useState([]);
 
     const [pageIndex, setPageIndex] = useState(1);
-    const [pageSize, setPageSize] = useState(9);
+    // const [pageSize, setPageSize] = useState(9);
+    const pageSize = 9;
     const [totalPages, setTotalPages] = useState(0);
     // const [posts, setPosts] = useState([]);
     const [count, setCount] = useState(0);
 
-    useEffect(() => {
-        search();
-    }, []);
+    
 
     const search = async () => {
         const req = {
@@ -39,6 +38,10 @@ function Home(props) {
         }
     }
 
+    useEffect(() => {
+        search();
+    }, []);
+    console.log(loader);
     return (
         <section className="slice-xl delimiter-top">
             <div className="container">

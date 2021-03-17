@@ -25,7 +25,7 @@ export default function Pagination({ changePagination, pageIndex, totalPages }) 
                     );
                 })}
                 <li className={`page-item ${totalPages === pageIndex ? 'disabled' : ''}`}>
-                    <a className="page-link" onClick={() => changePagination(pageIndex + 1)}>Next</a>
+                    <button className="page-link" onClick={() => changePagination(pageIndex + 1)}>Next</button>
                 </li>
             </ul>
         </nav>

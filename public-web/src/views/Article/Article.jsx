@@ -13,10 +13,6 @@ function Article(props) {
     let { slug } = useParams();
     const res = slug.split(".");
 
-    useEffect(() => {
-        console.log(res);
-        getArticleById(res);
-    }, []);
 
     const getArticleById = async (arraySlug) => {
         if (arraySlug && arraySlug.length !== 2) {
@@ -33,6 +29,12 @@ function Article(props) {
         }
     }
 
+    useEffect(() => {
+        console.log(res);
+        getArticleById(res);
+    }, []);
+
+    console.log(loader);
     return (
         <>
             <section className="slice slice-lg" data-offset-top="#header-main" style={{ paddingTop: 89 }}>
@@ -43,9 +45,9 @@ function Article(props) {
                             <p className="lead text-muted mb-0">{article ? article.description : ''}</p>
                             <div className="media align-items-center mt-5">
                                 <div>
-                                    <a href="#" className="avatar rounded-circle mr-3">
-                                        <img alt="Image placeholder" 
-                                        src="https://preview.webpixels.io/purpose-website-ui-kit/assets/img/theme/light/team-6-800x800.jpg" />
+                                    <a href="javscript://" className="avatar rounded-circle mr-3">
+                                        <img alt="Placeholder"
+                                            src="https://preview.webpixels.io/purpose-website-ui-kit/assets/img/theme/light/team-6-800x800.jpg" />
                                     </a>
                                 </div>
                                 <div className="media-body">
@@ -67,19 +69,19 @@ function Article(props) {
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-lg-9">
-                            <article dangerouslySetInnerHTML={{__html: article ? article.body : ''}}>
+                            <article dangerouslySetInnerHTML={{ __html: article ? article.body : '' }}>
                             </article>
                             <hr />
                             <h5 className="mb-4">Comments</h5>
                             <div className="mb-3">
                                 <div className="media media-comment">
-                                    <img alt="Image placeholder" className="rounded-circle shadow mr-4" src="https://preview.webpixels.io/purpose-website-ui-kit/assets/img/theme/light/team-2-800x800.jpg" style={{ width: "64px" }} />
+                                    <img alt="Placeholder" className="rounded-circle shadow mr-4" src="https://preview.webpixels.io/purpose-website-ui-kit/assets/img/theme/light/team-2-800x800.jpg" style={{ width: "64px" }} />
                                     <div className="media-body">
                                         <div className="media-comment-bubble left-top">
                                             <h6 className="mt-0">Alexis Ren</h6>
                                             <p className="text-sm lh-160">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
                                             <div className="icon-actions">
-                                                <a href="#" className="love active">
+                                                <a href="javascript://" className="love active">
                                                     <i className="far fa-heart"></i>
                                                     <span className="text-muted">10 likes</span>
                                                 </a>
@@ -88,7 +90,7 @@ function Article(props) {
                                     </div>
                                 </div>
                                 <div className="media media-comment align-items-center">
-                                    <img alt="Image placeholder" className="avatar rounded-circle shadow mr-4" src="https://preview.webpixels.io/purpose-website-ui-kit/assets/img/theme/light/team-2-800x800.jpg" />
+                                    <img alt="Placeholder" className="avatar rounded-circle shadow mr-4" src="https://preview.webpixels.io/purpose-website-ui-kit/assets/img/theme/light/team-2-800x800.jpg" />
                                     <div className="media-body">
                                         <form>
                                             <div className="form-group mb-0">

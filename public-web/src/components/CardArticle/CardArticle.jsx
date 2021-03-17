@@ -24,7 +24,7 @@ function CardArticle(props) {
                 <div className="mb-5 mb-lg-0" data-animate-hover="1">
                     <div className="animate-this">
                         <Link to={`/article/${item.slugName}.${item._id}`}>
-                            <img alt="Image" className="img-fluid rounded shadow"
+                            <img alt={linkImage} className="img-fluid rounded shadow"
                                 src={linkImage} />
                         </Link>
                     </div>

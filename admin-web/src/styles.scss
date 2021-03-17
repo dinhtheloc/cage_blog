@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+
+.lift {
+    cursor: pointer;
+    -webkit-transition: -webkit-box-shadow .25s ease,-webkit-transform .25s ease;
+    transition: -webkit-box-shadow .25s ease,-webkit-transform .25s ease;
+    -o-transition: box-shadow .25s ease,transform .25s ease;
+    transition: box-shadow .25s ease,transform .25s ease;
+    transition: box-shadow .25s ease,transform .25s ease,-webkit-box-shadow .25s ease,-webkit-transform .25s ease
+}
+
+.lift:focus,.lift:hover {
+    -webkit-box-shadow: 0 1rem 2.5rem rgba(27,22,66,.1),0 .5rem 1rem -.75rem rgba(27,22,66,.1)!important;
+    box-shadow: 0 1rem 2.5rem rgba(27,22,66,.1),0 .5rem 1rem -.75rem rgba(27,22,66,.1)!important;
+    -webkit-transform: translate3d(0,-3px,0);
+    transform: translate3d(0,-3px,0)
+}
+
+.lift-lg:focus,.lift-lg:hover {
+    -webkit-box-shadow: 0 1rem 5rem rgba(27,22,66,.1),0 2rem 3rem -1rem rgba(27,22,66,.05)!important;
+    box-shadow: 0 1rem 5rem rgba(27,22,66,.1),0 2rem 3rem -1rem rgba(27,22,66,.05)!important;
+    -webkit-transform: translate3d(0,-5px,0);
+    transform: translate3d(0,-5px,0)
+}
+
+.masonry-grid > div .thumbnail img {
+    margin-bottom: 1rem;
+  }
+  
+
+.modal-fullscreen {
+    width: 100vw;
+    max-width: none;
+    height: 100%;
+    margin: 0;
+}
+
+.modal-fullscreen .modal-content {
+    height: 100%;
+    border: 0;
+    border-radius: 0;
+}

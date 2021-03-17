@@ -1,9 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
-Footer.propTypes = {
-    
-};
 
 function Footer(props) {
     return (
@@ -14,7 +9,7 @@ function Footer(props) {
     <path d="M 0 0 c 0 0 200 50 500 50 s 500 -50 500 -50 v 101 h -1000 v -100 z"></path>
 </svg>
             </div>
-            <div className="container pt-5">
+            {/* <div className="container pt-5">
               <div className="row pt-md">
                 <div className="col-lg-4 mb-5 mb-lg-0">
                   <a href="index.html">
@@ -80,6 +75,8 @@ function Footer(props) {
                 </div>
               </div>
             </div>
+          
+           */}
           </footer>
         </div>
     );

@@ -1,23 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
-import Loading from './components/Loading/Loading';
-import Home from './views/Home/Home';
-import Article from './views/Article/Article';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route
+
+  Route, Switch
 } from "react-router-dom";
+import './App.css';
+import Header from './components/Header/Header';
+import Loading from './components/Loading/Loading';
+import Article from './views/Article/Article';
+import Home from './views/Home/Home';
 
 function App() {
   
 
   return (
     <Router>
-      {/* <Header></Header> */}
+      <Header></Header>
       <Switch>
         <Route exact path="/">
           <Home />
