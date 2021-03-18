@@ -25,7 +25,15 @@ const routes: Routes = [
       {
         path: 'images',
         loadChildren: () => import('./views/images/images.module').then(m => m.ImagesModule)
-      }
+      },
+      {
+        path: 'customers',
+        loadChildren: () => import('./views/customers/customers.module').then(m => m.CustomersModule)
+      },
+      {
+        path: 'orders',
+        loadChildren: () => import('./views/orders/orders.module').then(m => m.OrdersModule)
+      },
     ],
     canActivate: [AuthGuard]
   },

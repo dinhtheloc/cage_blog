@@ -17,6 +17,7 @@ import { AuthGuard } from './services/guard/auth.guard';
 import { PermissionGuard } from './services/guard/permission.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LottieModule } from 'ngx-lottie';
+import { ToastrModule } from 'ngx-toastr';
 
 
 export function playerFactory() {
@@ -39,7 +40,8 @@ export function playerFactory() {
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    LottieModule.forRoot({ player: playerFactory })
+    LottieModule.forRoot({ player: playerFactory }),
+    ToastrModule.forRoot()
   ],
   providers: [
     AuthGuard,
