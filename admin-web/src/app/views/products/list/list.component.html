@@ -75,9 +75,9 @@
             <img class="rounded" [src]="makeLinkImage(item.avatar)" alt="{{item.avatar}}">
           </div>
         </td>
-        <td><span class="font-weight-normal">{{item.buyingPrice | number:'1.0-0'}}</span></td>
-        <td><span class="font-weight-normal">{{item.saleprice | number:'1.0-0'}}</span></td>
-        <td><span class="font-weight-normal">{{item.inventoryNumber}}</span></td>
+        <td><span class="font-weight-normal">{{item.buyingPrice | number:'1.0-0'}} ₫</span></td>
+        <td><span class="font-weight-normal">{{item.saleprice | number:'1.0-0'}} ₫</span></td>
+        <td><span class="font-weight-normal">{{item.inventoryNumber| number:'1.0-0'}}</span></td>
         <td><span class="font-weight-normal">
             <span *ngIf="item.isActive" class="badge super-badge badge-lg badge-success">Có</span>
             <span *ngIf="!item.isActive" class="badge super-badge badge-lg badge-danger">Không</span>

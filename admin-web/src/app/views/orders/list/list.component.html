@@ -23,11 +23,32 @@
 
 <div class="table-settings mb-4">
   <div class="row align-items-center justify-content-between">
-    <div class="col col-md-6">
-      <div class="input-group">
+    <div class="col col-md-3">
+      <div class="form-group">
+        <label>Tên khách hàng</label>
         <input type="text" [(ngModel)]="nameSearch" class="form-control" placeholder="Tìm kiếm tên khách hàng">
-        <button class="btn btn-primary" (click)="search()" type="button">Tìm kiếm</button>
       </div>
+    </div>
+
+
+    <div class="col col-md-3">
+      <div class="form-group">
+        <label>Trạng thái hóa đơn</label>
+        <select class="form-control" [(ngModel)]="statusSearch">
+          <option [ngValue]="-1">Tất cả</option>
+          <option [ngValue]="1">Đã hoàn thành</option>
+          <option [ngValue]="0">Chưa hoàn thành</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col col-md-3">
+      <div class="form-group">
+        <label class="invisible">Tìm kiếm</label>
+
+        <button class="btn btn-primary w-100" (click)="search()" type="button">Tìm kiếm</button>
+      </div>
+
     </div>
     <div class="col-4 col-md-2 col-xl-1 pl-md-0 text-right">
       <div class="btn-group" dropdown placement="bottom right">
@@ -57,6 +78,7 @@
         <th class="border-0">Danh sách sản phẩm</th>
         <th class="border-0">Tổng tiền</th>
         <th class="border-0">Tiền lời</th>
+        <th class="border-0">Trạng thái</th>
         <th class="border-0">Ngày tạo</th>
       </tr>
     </thead>
@@ -72,6 +94,11 @@
           </span></td>
         <td><span class="font-weight-normal">{{item.totalAmount | number:'1.0-0'}} ₫</span></td>
         <td><span class="font-weight-normal text-success">{{item.profitAmount | number:'1.0-0'}} ₫</span></td>
+        <td><span class="font-weight-normal">
+            <span *ngIf="item.status" class="badge super-badge badge-lg badge-success">Đã hoàn thành</span>
+            <span *ngIf="!item.status" (click)="updateStatusOrder(item._id)"
+              class="badge super-badge badge-lg badge-danger lift">Chưa hoàn thành</span>
+          </span></td>
         <td><span class="font-weight-normal">{{item.createDate | date:'dd/MM/yyyy HH:mm:ss'}}</span></td>
         <!-- <td>
           <div class="btn-group" dropdown placement="bottom right">

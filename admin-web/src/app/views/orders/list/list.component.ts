@@ -19,6 +19,7 @@ export class ListComponent implements OnInit {
   totalSize = 0;
   itemRemove;
   nameSearch = '';
+  statusSearch = -1;
 
   @ViewChild(EditFormComponent) public editFormComponent: EditFormComponent;
   @ViewChild(CreateFormComponent) public createFormComponent: CreateFormComponent;
@@ -42,6 +43,7 @@ export class ListComponent implements OnInit {
 
     const params = new HttpParams().set('pageIndex', String(this.pageIndex))
       .set('name', String(this.nameSearch))
+      .set('status', String(this.statusSearch))
       .set('pageSize', String(this.pageSize));
 
     this.http.get(url, { params })
@@ -93,5 +95,25 @@ export class ListComponent implements OnInit {
     console.log(item);
   }
 
+  updateStatusOrder(id) {
+    const url = `${environment.urlApi}/api/updateStatusOrder`;
+
+
+    const body = {
+      _id: id,
+      status: true
+    };
+
+    this.http.post(url, body, { responseType: 'text' })
+      .subscribe(
+        res => {
+          // tslint:disable-next-line:no-string-literal
+          console.log(res);
+          this.search();
+          this.confirmModal.hide();
+          this.sharedService.activeConfetti.emit();
+        }
+      );
+  }
 
 }
