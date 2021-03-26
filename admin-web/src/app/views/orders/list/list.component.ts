@@ -20,10 +20,13 @@ export class ListComponent implements OnInit {
   itemRemove;
   nameSearch = '';
   statusSearch = -1;
+  idUpdateStatusOrder;
+  dateRange;
 
   @ViewChild(EditFormComponent) public editFormComponent: EditFormComponent;
   @ViewChild(CreateFormComponent) public createFormComponent: CreateFormComponent;
   @ViewChild('confirmModal', { static: false }) confirmModal: ModalDirective;
+  @ViewChild('confirmStatusModal', { static: false }) confirmStatusModal: ModalDirective;
 
   constructor(
     private http: HttpClient,
@@ -41,10 +44,19 @@ export class ListComponent implements OnInit {
   search() {
     const url = `${environment.urlApi}/api/getOrder`;
 
-    const params = new HttpParams().set('pageIndex', String(this.pageIndex))
-      .set('name', String(this.nameSearch))
-      .set('status', String(this.statusSearch))
-      .set('pageSize', String(this.pageSize));
+    let params = new HttpParams()
+    .set('pageIndex', String(this.pageIndex))
+    .set('pageSize', String(this.pageSize))
+    .set('status', String(this.statusSearch));
+
+    if (this.nameSearch) {
+      params = params.set('name', String(this.nameSearch));
+    }
+
+    if (this.dateRange && this.dateRange[0] && this.dateRange[1]) {
+      params = params.set('from', String(this.dateRange[0].toISOString()));
+      params = params.set('to', String(this.dateRange[1].toISOString()));
+    }
 
     this.http.get(url, { params })
       .subscribe(
@@ -74,7 +86,8 @@ export class ListComponent implements OnInit {
     const { _id } = this.itemRemove;
 
     const body = {
-      _id
+      _id,
+      list: this.itemRemove.list
     };
 
     this.http.post(url, body, { responseType: 'text' })
@@ -92,15 +105,14 @@ export class ListComponent implements OnInit {
   openRemoveForm(item) {
     this.itemRemove = item;
     this.confirmModal.show();
-    console.log(item);
   }
 
-  updateStatusOrder(id) {
+  updateStatusOrder() {
     const url = `${environment.urlApi}/api/updateStatusOrder`;
 
 
     const body = {
-      _id: id,
+      _id: this.idUpdateStatusOrder._id,
       status: true
     };
 
@@ -110,7 +122,7 @@ export class ListComponent implements OnInit {
           // tslint:disable-next-line:no-string-literal
           console.log(res);
           this.search();
-          this.confirmModal.hide();
+          this.confirmStatusModal.hide();
           this.sharedService.activeConfetti.emit();
         }
       );

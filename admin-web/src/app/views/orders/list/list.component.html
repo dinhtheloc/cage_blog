@@ -10,19 +10,42 @@
     <p class="mb-0">Tại đây bạn có thể thêm xóa sửa những hóa đơn trong hệ thống của bạn</p>
   </div>
   <div class="btn-toolbar mb-md-0">
-    <div class="btn-group"><button type="button" class="btn btn-sm btn-outline-secondary">Share</button> <button
-        type="button" class="btn btn-sm btn-outline-secondary">Export</button></div>
+    <div class="btn-group">
+      <button type="button" (click)="createFormComponent.open()" class="btn btn-sm btn-outline-secondary"><span
+          class="fas fa-plus"></span><span> Thêm mới hóa đơn</span></button>
+      <span dropdown placement="bottom right">
+        <button type="button" dropdownToggle style="
+    border-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+" class="btn btn-sm btn-outline-secondary">Config bảng</button>
+
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
+          <a (click)="pageSize = 30; search();" class="dropdown-item" href="javascript://">
+            <span *ngIf="pageSize === 30" class="fas fa-check mr-2"></span>30</a>
+          <a (click)="pageSize = 50; search();" class="dropdown-item" href="javascript://">
+            <span *ngIf="pageSize === 50" class="fas fa-check mr-2"></span>50</a>
+          <a (click)="pageSize = 100; search();" class="dropdown-item" href="javascript://">
+            <span *ngIf="pageSize === 100" class="fas fa-check mr-2"></span>100</a>
+        </div>
+      </span>
+    </div>
   </div>
 
 </div>
 
-<div class="py-4">
-  <a href="javascript://" (click)="createFormComponent.open()" class="btn btn-sm btn-primary">
-    <span class="fas fa-plus"></span><span> Thêm mới hóa đơn</span></a>
-</div>
 
-<div class="table-settings mb-4">
+<div class="table-settings pt-2">
   <div class="row align-items-center justify-content-between">
+    <div class="col col-md-3">
+      <div class="form-group">
+        <label for="dateRange">Thời gian tạo hóa đơn</label>
+        <input id="dateRange" class="form-control" type="text" placeholder="Chọn khoảng thời gian" [(ngModel)]="dateRange"
+          class="form-control" bsDaterangepicker>
+      </div>
+    </div>
+
+
     <div class="col col-md-3">
       <div class="form-group">
         <label>Tên khách hàng</label>
@@ -42,34 +65,19 @@
       </div>
     </div>
 
-    <div class="col col-md-3">
+    <div class="col col-md-2">
       <div class="form-group">
         <label class="invisible">Tìm kiếm</label>
-
         <button class="btn btn-primary w-100" (click)="search()" type="button">Tìm kiếm</button>
       </div>
 
     </div>
-    <div class="col-4 col-md-2 col-xl-1 pl-md-0 text-right">
-      <div class="btn-group" dropdown placement="bottom right">
-        <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" dropdownToggle>
-          <span class="icon icon-sm"><span class="fas fa-cog"></span> </span><span class="sr-only">Toggle
-            Dropdown</span></button>
-        <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
-          <a (click)="pageSize = 30; search();" class="dropdown-item" href="javascript://">
-            <span *ngIf="pageSize === 30" class="fas fa-check mr-2"></span>30</a>
-          <a (click)="pageSize = 50; search();" class="dropdown-item" href="javascript://">
-            <span *ngIf="pageSize === 50" class="fas fa-check mr-2"></span>50</a>
-          <a (click)="pageSize = 100; search();" class="dropdown-item" href="javascript://">
-            <span *ngIf="pageSize === 100" class="fas fa-check mr-2"></span>100</a>
-        </div>
-      </div>
-    </div>
+
   </div>
 </div>
 
-<div class="card card-body border-light shadow-sm table-wrapper table-responsive pt-0">
-  <table class="table table-hover">
+<div class="card card-body border-light shadow-sm table-wrapper table-responsive pt-0 pb-0">
+  <table class="table table-hover m-0">
     <thead>
       <tr>
         <th class="border-0">#</th>
@@ -96,33 +104,36 @@
         <td><span class="font-weight-normal text-success">{{item.profitAmount | number:'1.0-0'}} ₫</span></td>
         <td><span class="font-weight-normal">
             <span *ngIf="item.status" class="badge super-badge badge-lg badge-success">Đã hoàn thành</span>
-            <span *ngIf="!item.status" (click)="updateStatusOrder(item._id)"
+            <span *ngIf="!item.status" (click)="idUpdateStatusOrder = item; confirmStatusModal.show();"
               class="badge super-badge badge-lg badge-danger lift">Chưa hoàn thành</span>
           </span></td>
         <td><span class="font-weight-normal">{{item.createDate | date:'dd/MM/yyyy HH:mm:ss'}}</span></td>
-        <!-- <td>
-          <div class="btn-group" dropdown placement="bottom right">
+        <td>
+          <div *ngIf="!item.status" class="btn-group" dropdown placement="bottom right">
             <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" dropdownToggle
               aria-controls="dropdown-basic">
               <span class="icon icon-sm"><span class="fas fa-ellipsis-h icon-dark"></span> </span><span
                 class="sr-only">Toggle
                 Dropdown</span></button>
             <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
-              <a class="dropdown-item" href="javascript://" (click)="openUpdateForm(item)"><span
-                  class="fas fa-edit mr-2"></span>Edit</a>
+              <!-- <a class="dropdown-item" href="javascript://" (click)="openUpdateForm(item)"><span
+                  class="fas fa-edit mr-2"></span>Edit</a> -->
               <a class="dropdown-item text-danger" (click)="openRemoveForm(item)" href="javascript://"><span
                   class="fas fa-trash-alt mr-2"></span>Remove</a>
             </div>
           </div>
-        </td> -->
+        </td>
       </tr>
     </tbody>
   </table>
-  <div class="card-footer px-3 d-flex align-items-center justify-content-between">
-    <pagination [totalItems]="totalSize" [itemsPerPage]="pageSize" [(ngModel)]="pageIndex"
-      (pageChanged)="pageChanged($event)"></pagination>
-    <div class="font-weight-bold small">Showing <b>{{list.length}}</b> out of <b>{{totalSize}}</b> entries</div>
-  </div>
+
+</div>
+
+<div class="card-footer px-3 d-flex align-items-center justify-content-between">
+  <pagination [totalItems]="totalSize" [itemsPerPage]="pageSize" [(ngModel)]="pageIndex"
+    (pageChanged)="pageChanged($event)"></pagination>
+  <div class="font-weight-bold small">Showing <b>{{list.length}}</b> out of <b>{{totalSize}}</b> entries</div>
+
 </div>
 
 <!-- create form -->
@@ -142,12 +153,38 @@
       <div class="modal-body">
         <div class="py-3 text-center">
           <h4 class="modal-title my-3">Hệ thống muốn xác nhận từ bạn!</h4>
-          <p>Bạn có thực sự muốn xóa bài viết "<strong>{{itemRemove ? itemRemove.title : ''}}</strong>" ?</p>
+          <p>Bạn có thực sự muốn xóa hóa đơn "<strong>{{itemRemove ? itemRemove._id : ''}}</strong>" ?</p>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" (click)="remove()" class="btn btn-sm btn-primary">Xóa</button>
         <button type="button" class="btn btn-sm btn-white" (click)="confirmModal.hide()">Bỏ qua</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div bsModal #confirmStatusModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+  aria-labelledby="modal-notification" aria-hidden="true">
+  <div class="modal-dialog modal-info modal-dialog-centered" role="document">
+    <div class="modal-content bg-gradient-secondary">
+      <div class="modal-header">
+        <p class="modal-title">Thông báo từ hệ thống.</p>
+        <button type="button" class="close" (click)="confirmStatusModal.hide()" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="py-3 text-center">
+          <h4 class="modal-title my-3">Hệ thống muốn xác nhận từ bạn!</h4>
+          <p>Bạn có thực sự muốn cập nhật trạng thái hóa đơn
+            "<strong>{{idUpdateStatusOrder ? idUpdateStatusOrder._id : ''}}</strong>" ?</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="updateStatusOrder()" class="btn btn-sm btn-primary">Cập nhật</button>
+        <button type="button" class="btn btn-sm btn-white" (click)="confirmStatusModal.hide()">Bỏ qua</button>
       </div>
     </div>
   </div>

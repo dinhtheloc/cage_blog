@@ -32,9 +32,10 @@
               "./node_modules/quill/dist/quill.core.css",
               "./node_modules/quill/dist/quill.bubble.css",
               "./node_modules/quill/dist/quill.snow.css",
+              "src/assets/css/chartist.min.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": ["src/assets/js/chartist.min.js", "src/assets/js/chartist-plugin-tooltip.min.js"]
           },
           "configurations": {
             "production": {

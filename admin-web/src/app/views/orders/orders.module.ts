@@ -10,6 +10,8 @@ import { QuillModule } from 'ngx-quill';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { EditFormComponent } from './list/edit-form/edit-form.component';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
 
 
 @NgModule({
@@ -23,6 +25,7 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
     QuillModule.forRoot(),
     PaginationModule.forRoot(),
     TypeaheadModule.forRoot(),
+    BsDatepickerModule.forRoot(),
   ],
   declarations: [ListComponent, CreateFormComponent, EditFormComponent]
 })
