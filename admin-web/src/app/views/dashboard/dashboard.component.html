@@ -8,101 +8,18 @@
 <div class="row">
   <div class="col col-md-3">
     <div class="form-group">
-      <input id="dateRange" class="form-control" type="text" placeholder="Chọn khoảng thời gian" [(ngModel)]="dateRange"
-        class="form-control" bsDaterangepicker>
+        <input class="form-control" #drp="bsDaterangepicker" 
+        [maxDate]="maxDate"
+        bsDaterangepicker [(ngModel)]="bsRangeValue">
     </div>
   </div>
 </div>
-
-<div class="row justify-content-md-center">
-  <div class="col-12 col-sm-6 col-xl-4 mb-4">
-    <div class="card border-light shadow-sm">
-      <div class="card-body">
-        <div class="row d-block d-xl-flex align-items-center">
-          <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-            <div class="icon icon-shape icon-md icon-shape-tertiary rounded mr-4 mr-sm-0"><span
-                class="fas fa-coins"></span></div>
-            <div class="d-sm-none">
-              <h2 class="h5">Tổng tiền lời</h2>
-              <h3 class="mb-1">345,678</h3>
-            </div>
-          </div>
-          <div class="col-12 col-xl-7 px-xl-0">
-            <div class="d-none d-sm-block">
-              <h2 class="h5">Tổng tiền lời</h2>
-              <h3 class="mb-1">345,678 ₫</h3>
-            </div>
-            <!-- <small>Feb 1 - Apr 1</small> -->
-            <!-- <div class="small mt-2"><span class="fas fa-angle-up text-success"></span> <span
-                class="text-success font-weight-bold">18.2%</span> Since last month</div> -->
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="col-12 col-sm-6 col-xl-4 mb-4">
-    <div class="card border-light shadow-sm">
-      <div class="card-body">
-        <div class="row d-block d-xl-flex align-items-center">
-          <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-            <div class="icon icon-shape icon-md icon-shape-paypal rounded mr-4"><span class="fas fa-receipt"></span>
-            </div>
-            <div class="d-sm-none">
-              <h2 class="h5">Tổng số đơn hàng</h2>
-              <h3 class="mb-1">5,342</h3>
-            </div>
-          </div>
-          <div class="col-12 col-xl-7 px-xl-0">
-            <div class="d-none d-sm-block">
-              <h2 class="h5">Tổng số đơn hàng</h2>
-              <h3 class="mb-1">5,342</h3>
-            </div>
-            <!-- <small>Feb 1 - Apr 1</small> -->
-            <!-- <div class="small mt-2"><span class="fas fa-angle-up text-success"></span> <span
-                class="text-success font-weight-bold">28.2%</span> Since last month</div> -->
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-12 col-sm-6 col-xl-4 mb-4">
-    <div class="card border-light shadow-sm">
-      <div class="card-body">
-        <div class="row d-block d-xl-flex align-items-center">
-          <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-            <div class="icon icon-shape icon-md icon-shape-primary rounded mr-4"><span class="fas fa-users"></span>
-            </div>
-            <div class="d-sm-none">
-              <h2 class="h5">Tổng số khách hàng</h2>
-              <h3 class="mb-1">5,342</h3>
-            </div>
-          </div>
-          <div class="col-12 col-xl-7 px-xl-0">
-            <div class="d-none d-sm-block">
-              <h2 class="h5">Tổng số khách hàng</h2>
-              <h3 class="mb-1">5,342</h3>
-            </div>
-            <!-- <small>Feb 1 - Apr 1</small> -->
-            <!-- <div class="small mt-2"><span class="fas fa-angle-up text-success"></span> <span
-                class="text-success font-weight-bold">28.2%</span> Since last month</div> -->
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-</div>
-
 
 
 <div class="row">
-  <div class="col-12 mb-4">
+  <div class="col-12 col-xl-8">
 
-    <div class="card border-light shadow-sm">
+    <div class="card border-light shadow-sm mb-4">
       <div class="card-body d-flex flex-row align-items-center flex-0 border-bottom">
         <div class="d-block">
           <div class="h6 font-weight-normal text-gray mb-2">Sales Value</div>
@@ -117,33 +34,7 @@
         <div class="ct-chart-sales-value ct-major-tenth ct-series-b"></div>
       </div>
     </div>
-  </div>
-  
-</div>
-<div class="row">
-  <div class="col-12 col-xl-4 mb-4">
 
-    <div class="col-12 px-0 mb-4">
-      <div class="card border-light shadow-sm">
-        <div class="card-body">
-          <h2 class="h5">Top khách hàng mua nhiều nhất</h2>
-          <div class="d-block" *ngFor="let item of rankCustomers">
-            <div class="d-flex align-items-center pt-3 mr-5">
-              <div class="icon icon-shape icon-sm icon-shape-primary rounded mr-3"><span
-                  class="fas fa-chart-bar"></span></div>
-              <div class="d-block">
-                <label class="mb-0">{{item.totalAmount | number:'1.0-0'}} ₫</label>
-                <h4 class="mb-0">
-                  {{item.customer.name}}
-                </h4>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col">
     <div class="card border-light shadow-sm">
       <div class="card-header">
         <div class="row align-items-center">
@@ -170,6 +61,109 @@
             </tr>
           </tbody>
         </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-xl-4 mb-4">
+    <div class="row">
+      <div class="col-12 mb-4">
+        <div class="card border-light shadow-sm">
+          <div class="card-body">
+            <div class="row d-block d-xl-flex align-items-center">
+              <div
+                class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                <div class="icon icon-shape icon-md icon-shape-tertiary rounded mr-4 mr-sm-0"><span
+                    class="fas fa-coins"></span></div>
+                <div class="d-sm-none">
+                  <h2 class="h5">Tổng tiền lời</h2>
+                  <h3 class="mb-1">{{sumProfit | number:'1.0-0'}} ₫</h3>
+                </div>
+              </div>
+              <div class="col-12 col-xl-7 px-xl-0">
+                <div class="d-none d-sm-block">
+                  <h2 class="h5">Tổng tiền lời</h2>
+                  <h3 class="mb-1">{{sumProfit | number:'1.0-0'}} ₫</h3>
+                </div>
+                <!-- <small>Feb 1 - Apr 1</small> -->
+                <!-- <div class="small mt-2"><span class="fas fa-angle-up text-success"></span> <span
+                    class="text-success font-weight-bold">18.2%</span> Since last month</div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 mb-4">
+        <div class="card border-light shadow-sm">
+          <div class="card-body">
+            <div class="row d-block d-xl-flex align-items-center">
+              <div
+                class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                <div class="icon icon-shape icon-md icon-shape-paypal rounded mr-4"><span class="fas fa-receipt"></span>
+                </div>
+                <div class="d-sm-none">
+                  <h2 class="h5">Tổng cộng có {{countTrue + countFalse}} đơn hàng</h2>
+                </div>
+              </div>
+              <div class="col-12 col-xl-7 px-xl-0">
+                <div class="d-none d-sm-block">
+                  <h2 class="h5">Tổng cộng có {{countTrue + countFalse}} đơn hàng</h2>
+                </div>
+                <div class="small mt-2"><span class="text-success font-weight-bold">{{countTrue}}</span> Đã hoàn thành
+                </div>
+                <div class="small mt-2"><span class="text-danger font-weight-bold">{{countFalse}}</span> Chưa hoàn thành
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 mb-4">
+        <div class="card border-light shadow-sm">
+          <div class="card-body">
+            <div class="row d-block d-xl-flex align-items-center">
+              <div
+                class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                <div class="icon icon-shape icon-md icon-shape-primary rounded mr-4"><span class="fas fa-users"></span>
+                </div>
+                <div class="d-sm-none">
+                  <h2 class="h5">Tổng số khách hàng</h2>
+                  <h3 class="mb-1">{{countCustomer | number:'1.0-0'}}</h3>
+                </div>
+              </div>
+              <div class="col-12 col-xl-7 px-xl-0">
+                <div class="d-none d-sm-block">
+                  <h2 class="h5">Tổng số khách hàng</h2>
+                  <h3 class="mb-1">{{countCustomer | number:'1.0-0'}}</h3>
+                </div>
+                <!-- <small>Feb 1 - Apr 1</small> -->
+                <!-- <div class="small mt-2"><span class="fas fa-angle-up text-success"></span> <span
+                    class="text-success font-weight-bold">28.2%</span> Since last month</div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 ">
+        <div class="card border-light shadow-sm">
+          <div class="card-body">
+            <h2 class="h5">Top khách hàng mua nhiều nhất</h2>
+            <div class="d-block" *ngFor="let item of rankCustomers">
+              <div class="d-flex align-items-center pt-3 mr-5">
+                <div class="icon icon-shape icon-sm icon-shape-primary rounded mr-3"><span
+                    class="fas fa-chart-bar"></span></div>
+                <div class="d-block">
+                  <label class="mb-0">{{item.totalAmount | number:'1.0-0'}} ₫</label>
+                  <h4 class="mb-0">
+                    {{item.customer.name}}
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
