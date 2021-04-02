@@ -16,6 +16,7 @@ import { NavComponent } from './components/nav/nav.component';
 import { AuthGuard } from './services/guard/auth.guard';
 import { PermissionGuard } from './services/guard/permission.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { LottieModule } from 'ngx-lottie';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -41,7 +42,8 @@ export function playerFactory() {
     HttpClientModule,
     BrowserAnimationsModule,
     LottieModule.forRoot({ player: playerFactory }),
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    CollapseModule.forRoot()
   ],
   providers: [
     AuthGuard,

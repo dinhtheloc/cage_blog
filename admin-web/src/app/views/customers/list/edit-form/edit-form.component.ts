@@ -17,25 +17,13 @@ export class EditFormComponent implements OnInit {
 
   updateForm = new FormGroup({
     _id: new FormControl(null, Validators.required),
-    name: new FormControl({ value: null, disabled: true }),
-    slug: new FormControl({ value: null, disabled: true }),
-    avatar: new FormControl(null),
-    buyingPrice: new FormControl(null),
-    saleprice: new FormControl(null),
-    description: new FormControl(null),
-    shortDescription: new FormControl(null),
-    typeId: new FormControl(null),
-    categoryId: new FormControl(null),
-    image1: new FormControl(null),
-    image2: new FormControl(null),
-    image3: new FormControl(null),
-    image4: new FormControl(null),
-    inventoryNumber: new FormControl(null),
-    loves: new FormControl(null),
-    isActive: new FormControl(null)
+    name: new FormControl(null),
+    dateOfBirth: new FormControl(null),
+    address: new FormControl(null),
+    phone: new FormControl(null),
+    facebook: new FormControl(null),
+    email: new FormControl(null)
   });
-  category = [];
-  type = [];
 
   @ViewChild('editModal', { static: false }) editModal: ModalDirective;
 
@@ -45,8 +33,6 @@ export class EditFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getCategory();
-    this.getType();
   }
 
   open() {
@@ -54,49 +40,28 @@ export class EditFormComponent implements OnInit {
   }
 
   setDataForm(data) {
-    console.log('data', data);
     this.updateForm.setValue({
-      _id: data._id ? data._id : '',
-      name: data.name ? data.name : '',
-      slug: data.slug ? data.slug : '',
-      avatar: data.avatar ? data.avatar : '',
-      buyingPrice: data.buyingPrice ? data.buyingPrice : 0,
-      saleprice: data.saleprice ? data.saleprice : 0,
-      description: data.description ? data.description : '',
-      shortDescription: data.shortDescription ? data.shortDescription : '',
-      typeId: data.typeId ? data.typeId : '',
-      categoryId: data.categoryId ? data.categoryId : '',
-      image1: (data.images && data.images.length > 0) ? data.images[0] : '',
-      image2: (data.images && data.images.length > 1) ? data.images[1] : '',
-      image3: (data.images && data.images.length > 2) ? data.images[2] : '',
-      image4: (data.images && data.images.length > 3) ? data.images[3] : '',
-      inventoryNumber: data.inventoryNumber ? data.inventoryNumber : 0,
-      loves: data.loves ? data.loves : 0,
-      isActive: data.isActive ? data.isActive : false
+      _id: data._id ? data._id : null,
+      name: data.name ? data.name : null,
+      dateOfBirth: data.dateOfBirth ? new Date(data.dateOfBirth) : null,
+      address: data.address ? data.address : null,
+      phone: data.phone ? data.phone : null,
+      facebook: data.facebook ? data.facebook : null,
+      email: data.email ? data.email : null
     });
   }
 
   onSubmit() {
-    const url = `${environment.urlApi}/api/updateProduct`;
+    const url = `${environment.urlApi}/api/updateCustomer`;
 
     const body = {
       _id: String(this.updateForm.value._id),
-      categoryId: String(this.updateForm.value.categoryId),
-      typeId: String(this.updateForm.value.typeId),
-      avatar: String(this.updateForm.value.avatar),
-      images: [
-        String(this.updateForm.value.image1),
-        String(this.updateForm.value.image2),
-        String(this.updateForm.value.image3),
-        String(this.updateForm.value.image4),
-      ],
-      loves: Number(this.updateForm.value.loves),
-      buyingPrice: Number(this.updateForm.value.buyingPrice),
-      saleprice: Number(this.updateForm.value.saleprice),
-      inventoryNumber: Number(this.updateForm.value.inventoryNumber),
-      shortDescription: String(this.updateForm.value.shortDescription),
-      description: String(this.updateForm.value.description),
-      isActive: Boolean(this.updateForm.value.isActive)
+      name: this.updateForm.value.name,
+      dateOfBirth: this.updateForm.value.dateOfBirth,
+      address: this.updateForm.value.address,
+      phone: this.updateForm.value.phone,
+      facebook: this.updateForm.value.facebook,
+      email: this.updateForm.value.email
     };
 
     this.http.post(url, body, { responseType: 'text' })
@@ -111,36 +76,6 @@ export class EditFormComponent implements OnInit {
       );
   }
 
-  getCategory() {
-    const url = `${environment.urlApi}/api/getCategory`;
-    const params = new HttpParams()
-      .set('pageIndex', String(0))
-      .set('pageSize', String(0));
-
-    this.http.get(url, { params })
-      .subscribe(
-        (res: any) => {
-          const { category } = res;
-          console.log('category', category);
-          this.category = category;
-        }
-      );
-  }
-  getType() {
-    const url = `${environment.urlApi}/api/getType`;
-    const params = new HttpParams()
-      .set('pageIndex', String(0))
-      .set('pageSize', String(0));
-
-    this.http.get(url, { params })
-      .subscribe(
-        (res: any) => {
-          const { type } = res;
-          console.log('type', type);
-          this.type = type;
-        }
-      );
-  }
 
   makeLinkImage(link) {
     if (link) {

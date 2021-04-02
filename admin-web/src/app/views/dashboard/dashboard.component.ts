@@ -10,6 +10,7 @@ export class DashboardComponent implements OnInit {
 
   bsRangeValue: Date[];
   maxDate = new Date();
+  chart;
 
   constructor(
     private http: HttpClient) {
@@ -25,8 +26,36 @@ export class DashboardComponent implements OnInit {
   countTrue = 0;
   sumProfit = 0;
   countCustomer = 0;
+  totalProfit = 0;
+  totalCount = 0;
 
   ngOnInit() {
+    this.chart = new Chartist.Line('.ct-chart-sales-value', {
+      labels: [],
+      series: [[]]
+    }, {
+      low: 0,
+      showArea: true,
+      fullWidth: true,
+      plugins: [
+        Chartist.plugins.tooltip()
+      ],
+      axisX: {
+        // On the x-axis start means top and end means bottom
+        position: 'end',
+        showGrid: false
+      },
+      axisY: {
+        // On the y-axis start means left and end means right
+        showGrid: true,
+        showLabel: true,
+        labelInterpolationFnc: (value) => {
+          return value;
+        }
+      }
+    });
+
+
     this.getTrendingProducts();
     this.getRankCustomers();
     this.getReportOrder();
@@ -90,54 +119,41 @@ export class DashboardComponent implements OnInit {
       .subscribe(
         (res: any) => {
           console.log(res);
-          const { result } = res;
-
-
+          const { result, totalProfit, totalCount } = res;
+          this.totalProfit = totalProfit;
+          this.totalCount = totalCount;
           if (result && result.length > 0) {
             const labels = [];
             const values = [];
             for (const iterator of result) {
-              labels.push(this.dateFormat(new Date(iterator.label)));
-              values.push(String(iterator.value));
+              const text = this.dateFormat(new Date(iterator.label));
+              labels.push(text);
+              values.push({meta: `Ngày: ${text}`, value: String(iterator.value) });
             }
-            console.log(labels);
-            console.log(values);
-            const chart = new Chartist.Line('.ct-chart-sales-value', {
+            this.chart.update({
               labels,
               series: [values]
-            }, {
-              low: 0,
-              showArea: true,
-              fullWidth: true,
-              plugins: [
-                Chartist.plugins.tooltip()
-              ],
-              axisX: {
-                // On the x-axis start means top and end means bottom
-                position: 'end',
-                showGrid: false
-              },
-              axisY: {
-                // On the y-axis start means left and end means right
-                showGrid: true,
-                showLabel: true,
-                labelInterpolationFnc: (value) => {
-                  return value;
-                }
-              }
             });
           }
-          // this.rankCustomers = dataRankCustomers || [];
         }
       );
   }
 
   dateFormat(date) {
-    const day = date.getDay();
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    return `${day}/${month}`;
+  }
+
+  dateFormatHasYear(date) {
+    const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
 
-    return `${day}-${month}-${year}`;
+  handleChangeDateRangePicker() {
+    console.log('change', this.bsRangeValue);
   }
 
 }

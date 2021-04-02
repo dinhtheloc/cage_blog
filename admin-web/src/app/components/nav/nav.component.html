@@ -2,9 +2,8 @@
   <div class="sidebar-sticky pt-4 mx-auto">
     <div class="user-card d-flex align-items-center justify-content-between justify-content-md-center pb-4">
       <div class="d-flex align-items-center">
-        <div class="user-avatar lg-avatar mr-4"><img
-            src="https://demo.themesberg.com/bootstrap/rocket/assets/img/team/profile-picture-3.jpg"
-            class="card-img-top rounded-circle border-white" alt="locdt2"></div>
+        <div class="user-avatar lg-avatar mr-4"><img src="/assets/img/blackLogo.svg" class="card-img-top"
+            alt="xing beauty logo"></div>
         <div class="d-block">
           <h2 class="h6">Hi, Admin</h2>
           <a href="#" (click)="logout()" class="btn btn-secondary btn-xs"><span class="mr-2"><span
@@ -22,8 +21,22 @@
       <li routerLinkActive="active" class="nav-item"><a routerLink="/articles" class="nav-link"><span
             class="sidebar-icon"><span class="far fa-newspaper"></span></span> <span>Quản lý bài viết</span></a></li>
 
-      <li routerLinkActive="active" class="nav-item"><a routerLink="/products" class="nav-link"><span
-            class="sidebar-icon"><span class="fas fa-boxes"></span></span> <span>Quản lý sản phẩm</span></a></li>
+      <li class="nav-item">
+        <a class="nav-link d-flex justify-content-between align-items-center collapsed" 
+        (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic"
+        ><span>
+            <span class="sidebar-icon"><span class="fas fa-boxes"></span></span>Quản lý sản phẩm</span>
+          <span class="link-arrow {{!isCollapsed ? 'rotate' : ''}}"><span class="fas fa-chevron-right"></span></span>
+        </a>
+        <div class="multi-level collapse" id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
+          <ul class="flex-column nav">
+            <li routerLinkActive="active" class="nav-item"><a class="nav-link" routerLink="/products"><span>Danh mục</span></a></li>
+            <li routerLinkActive="active" class="nav-item"><a class="nav-link" routerLink="/products"><span>Loại hàng hóa</span></a></li>
+            <li routerLinkActive="active" class="nav-item"><a class="nav-link" routerLink="/products"><span>Sản phẩm</span></a></li>
+          </ul>
+        </div>
+      </li>
 
       <li routerLinkActive="active" class="nav-item"><a routerLink="/images" class="nav-link"><span
             class="sidebar-icon"><span class="fas fa-tablet-alt"></span></span> <span>Quản lý hình ảnh</span></a></li>
