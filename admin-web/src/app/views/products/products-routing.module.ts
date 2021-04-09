@@ -5,11 +5,27 @@ import {
 } from '@angular/router';
 
 import { ListComponent } from './list/list.component';
+import { TypesComponent } from './types/types.component';
+import { CategoriesComponent } from './categories/categories.component';
+
 
 const routes: Routes = [
   {
     path: '',
-    component: ListComponent
+    children: [
+      {
+        path: 'categories',
+        component: CategoriesComponent,
+      },
+      {
+        path: 'types',
+        component: TypesComponent,
+      },
+      {
+        path: 'list',
+        component: ListComponent,
+      }
+    ]
   }
 ];
 

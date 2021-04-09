@@ -1,0 +1,28 @@
+<div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-child-name">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-child-name" class="modal-title pull-left">Tạo mới category</h4>
+        <button type="button" class="close pull-right" (click)="childModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+          <div class="row mb-3">
+            <div class="col">
+              <div class="form-group">
+                <label for="name">Tên category</label>
+                <input class="form-control" id="name" formControlName="name" type="text"
+                  placeholder="Nhập tên category">
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Tạo mới</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,7 +9,12 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { QuillModule } from 'ngx-quill';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { EditFormComponent } from './list/edit-form/edit-form.component';
-
+import { TypesComponent } from './types/types.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { CreateCategoriesFormComponent } from './categories/create-form/create-categories-form.component';
+import { EditCategoriesFormComponent } from './categories/edit-form/edit-categories-form.component';
+import { CreateTypesFormComponent } from './types/create-form/create-types-form.component';
+import { EditTypesFormComponent } from './types/edit-form/edit-types-form.component';
 
 @NgModule({
   imports: [
@@ -22,6 +27,10 @@ import { EditFormComponent } from './list/edit-form/edit-form.component';
     QuillModule.forRoot(),
     PaginationModule.forRoot()
   ],
-  declarations: [ListComponent, CreateFormComponent, EditFormComponent]
+  declarations: [ListComponent, CreateFormComponent, EditFormComponent, TypesComponent, CategoriesComponent,
+    CreateCategoriesFormComponent,
+    EditCategoriesFormComponent,
+    CreateTypesFormComponent,
+    EditTypesFormComponent]
 })
 export class ProductsModule { }
