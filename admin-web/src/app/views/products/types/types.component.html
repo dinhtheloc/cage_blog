@@ -13,7 +13,7 @@
     <div class="btn-group"><button type="button" class="btn btn-sm btn-outline-secondary">Share</button> <button
         type="button" class="btn btn-sm btn-outline-secondary">Export</button></div>
   </div>
-  
+
 </div>
 
 <div class="py-4">
@@ -35,8 +35,7 @@
     </div>
     <div class="col-4 col-md-2 col-xl-1 pl-md-0 text-right">
       <div class="btn-group" dropdown placement="bottom right">
-        <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
-          dropdownToggle>
+        <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" dropdownToggle>
           <span class="icon icon-sm"><span class="fas fa-cog"></span> </span><span class="sr-only">Toggle
             Dropdown</span></button>
         <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
@@ -63,7 +62,7 @@
         <th class="border-0">Ngày cập nhật</th>
       </tr>
     </thead>
-    
+
     <tbody>
       <tr [ngClass]="{'out-of-stock': item.inventoryNumber === 0}" *ngFor="let item of list; let i = index">
         <td><span class="font-weight-bold">{{((pageIndex-1) *pageSize) + (i+1)}}</span></td>
@@ -73,8 +72,8 @@
         <td><span class="font-weight-normal">{{item.updateDate | date:'dd/MM/yyyy HH:mm:ss'}}</span></td>
         <td>
           <div class="btn-group" dropdown placement="bottom right">
-            <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
-              dropdownToggle aria-controls="dropdown-basic">
+            <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" dropdownToggle
+              aria-controls="dropdown-basic">
               <span class="icon icon-sm"><span class="fas fa-ellipsis-h icon-dark"></span> </span><span
                 class="sr-only">Toggle
                 Dropdown</span></button>

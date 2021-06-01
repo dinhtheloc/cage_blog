@@ -52,6 +52,7 @@ export class CreateFormComponent implements OnInit {
             .subscribe(
                 res => {
                     // tslint:disable-next-line:no-string-literal
+                    this.createForm.reset();
                     this.childModal.hide();
                     this.search.emit();
                     this.sharedService.activeConfetti.emit();

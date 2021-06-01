@@ -67,7 +67,7 @@ export class ListComponent implements OnInit {
   }
 
   remove() {
-    const url = `${environment.urlApi}/api/deleteArticle`;
+    const url = `${environment.urlApi}/api/deleteProduct`;
 
     const { _id } = this.itemRemove;
 

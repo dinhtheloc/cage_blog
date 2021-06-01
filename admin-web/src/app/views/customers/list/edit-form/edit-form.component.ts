@@ -53,7 +53,6 @@ export class EditFormComponent implements OnInit {
 
   onSubmit() {
     const url = `${environment.urlApi}/api/updateCustomer`;
-
     const body = {
       _id: String(this.updateForm.value._id),
       name: this.updateForm.value.name,
